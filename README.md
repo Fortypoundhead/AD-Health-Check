@@ -71,27 +71,34 @@ Tools used:
 
 Basic:
 
+```
 .\Invoke-ADHealthAudit.ps1
+```
 
 
 Custom output folder:
 
+```
 .\Invoke-ADHealthAudit.ps1 -OutputDir C:\Reports\ADHealth
-
+```
 
 Enable DFSR backlog checks:
 
+```
 .\Invoke-ADHealthAudit.ps1 -EnableDfsrBacklog
-
+```
 
 Scan more event history:
 
+```
 .\Invoke-ADHealthAudit.ps1 -DaysEvents 3
+```
 
 ## Recommended Scheduled Task (Weekly)
 
 Example:
 
+```
 $action = New-ScheduledTaskAction `
   -Execute "powershell.exe" `
   -Argument "-NoProfile -ExecutionPolicy Bypass -File C:\Scripts\Invoke-ADHealthAudit.ps1 -OutputDir \\fileserver\ops\ADHealth"
@@ -103,6 +110,7 @@ Register-ScheduledTask `
   -Action $action `
   -Trigger $trigger `
   -RunLevel Highest
+```
 
 ## Why this exists
 
@@ -110,49 +118,36 @@ Active Directory rarely fails suddenly.
 
 It usually degrades first:
 
-slow authentication
-
-DNS drift
-
-replication lag
-
-subtle event log warnings
+- slow authentication
+- DNS drift
+- replication lag
+- subtle event log warnings
 
 This script surfaces those early signals before users notice.
 
 ## Designed Philosophy
 
-Practical over academic
-
-Low noise, high signal
-
-Minimal dependencies
-
-One-file deploy
-
-Easy automation
+- Practical over academic
+- Low noise, high signal
+- Minimal dependencies
+- One-file deploy
+- Easy automation
 
 ## Notes
 
-Some checks only return full results when run on a Domain Controller.
-
-DNS and DFSR logs may not exist on member servers.
-
-The script intentionally favors warning over false confidence.
+- Some checks only return full results when run on a Domain Controller.
+- DNS and DFSR logs may not exist on member servers.
+- The script intentionally favors warning over false confidence.
 
 ## Roadmap Ideas
 
 Possible future improvements:
 
-Email or Teams alerts
-
-Historical trend scoring
-
-Multi-domain forest awareness
-
-HTML charts / trend graphs
-
-AD site topology visual summary
+- Email or Teams alerts
+- Historical trend scoring
+- Multi-domain forest awareness
+- HTML charts / trend graphs
+- AD site topology visual summary
 
 ## Author
 
